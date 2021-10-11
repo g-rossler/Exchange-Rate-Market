@@ -2,12 +2,22 @@
 
 function borrarCantidades(){
     document.querySelector("#importe").value = ""
+    document.querySelector("#importe").style.borderColor = "black"
 }
 
 function mostrarResultados(){
     document.querySelector("#cuadro-resultado").style.display = "flex"
 
     crearElementoResultado()
+}
+
+function borrarResultado() {
+    
+    if(document.querySelector("#cuadro-resultado-titulo")) {
+        document.querySelector("#cuadro-resultado-titulo").remove()
+        document.querySelector("#cuadro-resultado-cotizacion").remove()
+    }
+
 }
 
 function crearElementoResultado(){
@@ -29,10 +39,29 @@ function intercambiarMoneda() {
     document.querySelector("#moneda-futuro").options.selectedIndex = indiceMonedaBase
 }
 
+function controlValoresIngresados(){
+    let cantidadIngresada = document.querySelector("#importe").value
+    if(cantidadIngresada <= 0) {
+        document.querySelector("#importe").style.borderColor = "red"
+        document.querySelector("#error").style.display = "block"
+        borrarResultado()
+        document.querySelector("#cuadro-resultado").style.display = "none"
+    } else {
+        cotizar()
+    }
+}
+
+function limpiarPagina() {
+    borrarResultado()
+    document.querySelector("#importe").style.borderColor = "black"
+    document.querySelector("#error").style.display = "none"
+}
 
 function cotizar() {
-    let resultado;
     
+    let resultado;
+    limpiarPagina()
+
     let monedaBase = document.querySelector("#moneda-base").selectedOptions[0].innerText
     let monedaFuturo = document.querySelector("#moneda-futuro").selectedOptions[0].innerText
     let cantidadACotizar = document.querySelector("#importe").value
@@ -44,9 +73,11 @@ function cotizar() {
     fetch(paginaWeb)
     .then(response => response.json())
     .then(responseJSON => {
-        resultado = responseJSON.rates[monedaFuturo]
+        resultado = responseJSON.rates[monedaFuturo].toFixed(2)
+        objeto = responseJSON
 
         textoResultado.innerText = `${cantidadACotizar} ${monedaBase} son ${resultado} ${monedaFuturo}`
+
         console.log(responseJSON)})
     .catch(error => console.error("error", error))
 
@@ -55,6 +86,7 @@ function cotizar() {
 
 }
 
+let objeto;
 let botonBorrarCantidad = document.querySelector(".bi-backspace")
 let botonIntercambioMonedas = document.querySelector(".btn-outline-primary")
 let botonCotizar = document.querySelector("#boton-cotizar")
@@ -62,15 +94,25 @@ let botonCotizar = document.querySelector("#boton-cotizar")
 
 botonBorrarCantidad.onclick = borrarCantidades
 botonIntercambioMonedas.onclick = intercambiarMoneda
-botonCotizar.onclick = cotizar
+botonCotizar.onclick = controlValoresIngresados
+
+/*
+        for (const [key, value] of Object.entries(objeto.rates)) {
+            console.log(`${key}: ${value}`);}
+*/
 
 
 
-
-
-
-
-
+/*
+var d = new Date();
+d.setDate(d.getDate() - 12);
+console.log(d.toString());
+const jsonDate = d.toJSON();
+console.log(jsonDate);
+console.log(jsonDate.slice(0,10))
+let hola = jsonDate.slice(0,10)
+console.log(hola)
+*/
 
 
 /*

@@ -46,8 +46,9 @@
               <div class="col-4 cuadros-calculadora" id="cuadro-calculadora-opciones-futuro"> 
                 <div>
                   <p>A:</p>
-
+                  
                     <select name="moneda-futuro" id="moneda-futuro" >
+                      
                       <option value="ARS">ARS</option>
                       <option value="USD">USD</option>
                       <option value="USD">EUR</option>
@@ -55,14 +56,19 @@
                     </select>
 
                 </div>
-
+                
                 
               </div>
               <div class="col-3 cuadros-calculadora"> 
                   <div>
                     <label for="number" id="label-importe">Cantidad a convertir:</label>
-                    <input type="number" name="importe" id="importe" placeholder="1">
-                    <i class="bi bi-backspace"></i>
+                    <div>
+                      <input type="number" name="importe" id="importe" placeholder="$1.00">
+                      <i class="bi bi-backspace"></i>
+                    </div>
+                    <div id="error">
+                      Introduzca una cantidad positiva.
+                    </div>
                     <!---Poner controles para que no introduscan numeros negativos-->
                   </div>
                  
@@ -78,7 +84,7 @@
         </div>
 
         <div class="row filas" id="cuadro-resultado">
-         
+         <div id="otas-monedas" ></div>
        </div>
 
 

@@ -13,7 +13,7 @@ footer{
 
 #cuadro-principal{
     background: rgb(250, 250, 250);
-    border: 1px solid;
+    border: 2px solid;
     box-shadow: 10px 14px 21px -3px rgba(0,0,0,0.79);
     -webkit-box-shadow: 10px 14px 21px -3px rgba(0,0,0,0.79);
     -moz-box-shadow: 10px 14px 21px -3px rgba(0,0,0,0.79);
@@ -34,6 +34,8 @@ h2{
 #cuadro-resultado{
     display: none;
     padding: 1rem 0;
+    border: 1px solid;
+    margin-bottom: 1rem;
 }
 
 #cuadro-grafico{
@@ -78,13 +80,8 @@ h2{
 
 .bi-backspace{
     cursor: pointer;
-    transition: background-color .5s;
 }
 
-.bi-backspace:hover{
-    cursor: pointer;
-    background-color: black;
-}
 
 .cuadros-calculadora{
     margin: 1rem 0;
@@ -92,8 +89,16 @@ h2{
 
 #importe{
     text-align: end;
+    max-width: 75%;
+    border: 1px solid;
+    border-color: black;
 }
 
 #label-importe{
     margin-bottom: 1rem;
+}
+
+#error{
+    display: none;
+    color: red;
 }
