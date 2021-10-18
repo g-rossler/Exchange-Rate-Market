@@ -20,6 +20,97 @@ function borrarResultado() {
 
 }
 
+function grafico(arrayFechas, cotizacion){
+    let max = Math.max(...cotizacion) + 5
+    let min = Math.min(...cotizacion) - 5
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: arrayFechas,
+        datasets: [{
+            label: '1 USD ',
+            fill: true,
+            data: cotizacion,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        scales: {
+            y: {
+            min: min,
+            max: max,
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index'
+        }
+    }
+    });
+}
+
+
+function crearGrafico() {
+    let fechaFinal = fechaHoy()
+    let fechaInicio = fechaTreintaDias()
+    
+
+    let paginaWeb = `https://api.exchangerate.host/timeseries?start_date=${fechaInicio}&end_date=${fechaFinal}&base=usd&symbols=ARS`
+
+    let arrayFechas
+    let objetoUno
+    fetch(paginaWeb)
+    .then(response => response.json())
+    .then(responseJSON => {
+        objetoUno = responseJSON;
+        arrayFechas = Object.keys(objetoUno.rates);
+        let cotizacion = [];
+        for(let tasa of Object.values(objetoUno.rates)){
+        console.log(tasa.ARS)
+        cotizacion.push(tasa.ARS)
+        }
+
+
+        grafico(arrayFechas, cotizacion)
+        
+    
+
+    })
+    .catch(error => console.error("error", error))
+
+    
+
+
+
+}
+
+function fechaTreintaDias(){
+    let fecha = new Date();
+    fecha.setDate(fecha.getDate() - 30);
+    const jsonDate = fecha.toJSON();
+    let fechaVieja = jsonDate.slice(0,10)
+    return fechaVieja
+}
+
+function fechaHoy(){
+    let fecha = new Date();
+    const jsonDate = fecha.toJSON();
+    let fechaHoy = jsonDate.slice(0,10)
+    return fechaHoy
+}
+
 function crearElementoResultado(){
     let $divCuadroResultado = document.querySelector("#cuadro-resultado")
     let $divCuadroResultadoTitulo = document.createElement("div")
@@ -57,15 +148,19 @@ function limpiarPagina() {
     document.querySelector("#error").style.display = "none"
 }
 
+
+
 function cotizar() {
-    
+    let objeto;
     let resultado;
     limpiarPagina()
 
     let monedaBase = document.querySelector("#moneda-base").selectedOptions[0].innerText
     let monedaFuturo = document.querySelector("#moneda-futuro").selectedOptions[0].innerText
     let cantidadACotizar = document.querySelector("#importe").value
+    crearGrafico()
     mostrarResultados()
+    
     let textoResultado = document.querySelector("#cuadro-resultado-cotizacion")
     let paginaWeb = `https://api.exchangerate.host/latest?base=${monedaBase}&amount=${cantidadACotizar}`
 
@@ -86,7 +181,7 @@ function cotizar() {
 
 }
 
-let objeto;
+
 let botonBorrarCantidad = document.querySelector(".bi-backspace")
 let botonIntercambioMonedas = document.querySelector(".btn-outline-primary")
 let botonCotizar = document.querySelector("#boton-cotizar")
