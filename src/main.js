@@ -21,8 +21,8 @@ function borrarResultado() {
 }
 
 function grafico(arrayFechas, cotizacion){
-    let max = Math.max(...cotizacion) + 5
-    let min = Math.min(...cotizacion) - 5
+    let max = (Math.max(...cotizacion)) * 1.005
+    let min = (Math.min(...cotizacion)) * 0.995
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
     type: 'line',
@@ -44,11 +44,6 @@ function grafico(arrayFechas, cotizacion){
     options: {
         scales: {
             y: {
-                beginAtZero: true
-            }
-        },
-        scales: {
-            y: {
             min: min,
             max: max,
             }
@@ -62,12 +57,12 @@ function grafico(arrayFechas, cotizacion){
 }
 
 
-function crearGrafico() {
+function crearGrafico(monedaBase, monedaFuturo) {
     let fechaFinal = fechaHoy()
     let fechaInicio = fechaTreintaDias()
     
 
-    let paginaWeb = `https://api.exchangerate.host/timeseries?start_date=${fechaInicio}&end_date=${fechaFinal}&base=usd&symbols=ARS`
+    let paginaWeb = `https://api.exchangerate.host/timeseries?start_date=${fechaInicio}&end_date=${fechaFinal}&base=${monedaBase}&symbols=${monedaFuturo}`
 
     let arrayFechas
     let objetoUno
@@ -78,8 +73,7 @@ function crearGrafico() {
         arrayFechas = Object.keys(objetoUno.rates);
         let cotizacion = [];
         for(let tasa of Object.values(objetoUno.rates)){
-        console.log(tasa.ARS)
-        cotizacion.push(tasa.ARS)
+            cotizacion.push(tasa[monedaFuturo])
         }
 
 
@@ -158,7 +152,7 @@ function cotizar() {
     let monedaBase = document.querySelector("#moneda-base").selectedOptions[0].innerText
     let monedaFuturo = document.querySelector("#moneda-futuro").selectedOptions[0].innerText
     let cantidadACotizar = document.querySelector("#importe").value
-    crearGrafico()
+    crearGrafico(monedaBase, monedaFuturo)
     mostrarResultados()
     
     let textoResultado = document.querySelector("#cuadro-resultado-cotizacion")
@@ -173,7 +167,7 @@ function cotizar() {
 
         textoResultado.innerText = `${cantidadACotizar} ${monedaBase} son ${resultado} ${monedaFuturo}`
 
-        console.log(responseJSON)})
+})
     .catch(error => console.error("error", error))
 
 
