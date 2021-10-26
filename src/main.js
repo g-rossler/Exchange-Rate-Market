@@ -20,76 +20,6 @@ function borrarResultado() {
 
 }
 
-function grafico(arrayFechas, cotizacion){
-    let max = (Math.max(...cotizacion)) * 1.005
-    let min = (Math.min(...cotizacion)) * 0.995
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: arrayFechas,
-        datasets: [{
-            label: '1 USD ',
-            fill: true,
-            data: cotizacion,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-            min: min,
-            max: max,
-            }
-        },
-        interaction: {
-            intersect: false,
-            mode: 'index'
-        }
-    }
-    });
-}
-
-
-function crearGrafico(monedaBase, monedaFuturo) {
-    let fechaFinal = fechaHoy()
-    let fechaInicio = fechaTreintaDias()
-    
-
-    let paginaWeb = `https://api.exchangerate.host/timeseries?start_date=${fechaInicio}&end_date=${fechaFinal}&base=${monedaBase}&symbols=${monedaFuturo}`
-
-    let arrayFechas
-    let objetoUno
-    fetch(paginaWeb)
-    .then(response => response.json())
-    .then(responseJSON => {
-        objetoUno = responseJSON;
-        arrayFechas = Object.keys(objetoUno.rates);
-        let cotizacion = [];
-        for(let tasa of Object.values(objetoUno.rates)){
-            cotizacion.push(tasa[monedaFuturo])
-        }
-
-
-        grafico(arrayFechas, cotizacion)
-        
-    
-
-    })
-    .catch(error => console.error("error", error))
-
-    
-
-
-
-}
-
 function fechaTreintaDias(){
     let fecha = new Date();
     fecha.setDate(fecha.getDate() - 30);
@@ -122,6 +52,9 @@ function intercambiarMoneda() {
     let indiceMonedaFuturo = document.querySelector("#moneda-futuro").options.selectedIndex
     document.querySelector("#moneda-base").options.selectedIndex = indiceMonedaFuturo
     document.querySelector("#moneda-futuro").options.selectedIndex = indiceMonedaBase
+    agregarBanderaInputMonedaBase()
+    agregarBanderaInputMonedaFuturo()
+
 }
 
 function controlValoresIngresados(){
@@ -169,80 +102,37 @@ function cotizar() {
 
 })
     .catch(error => console.error("error", error))
+}
 
+function agregarBanderaInputMonedaFuturo() {
+    if(document.querySelector("#moneda-futuro").value === "ARS") {
+        document.querySelector("#moneda-futuro").className = "moneda-futuro-ars"
+    } else if(document.querySelector("#moneda-futuro").value === "USD") {
+        document.querySelector("#moneda-futuro").className = "moneda-futuro-usd"
+    } else {
+        document.querySelector("#moneda-futuro").className = "moneda-futuro-eur"
+    }
+}
 
-
-
+function agregarBanderaInputMonedaBase() {
+    if(document.querySelector("#moneda-base").value === "ARS") {
+        document.querySelector("#moneda-base").className = "moneda-base-ars"
+    } else if(document.querySelector("#moneda-base").value === "USD") {
+        document.querySelector("#moneda-base").className = "moneda-base-usd"
+    } else {
+        document.querySelector("#moneda-base").className = "moneda-base-eur"
+    }
 }
 
 
 let botonBorrarCantidad = document.querySelector(".bi-backspace")
 let botonIntercambioMonedas = document.querySelector(".btn-outline-primary")
 let botonCotizar = document.querySelector("#boton-cotizar")
+document.querySelector("#moneda-futuro").onchange = agregarBanderaInputMonedaFuturo
+document.querySelector("#moneda-base").onchange = agregarBanderaInputMonedaBase
 
 
 botonBorrarCantidad.onclick = borrarCantidades
 botonIntercambioMonedas.onclick = intercambiarMoneda
 botonCotizar.onclick = controlValoresIngresados
 
-/*
-        for (const [key, value] of Object.entries(objeto.rates)) {
-            console.log(`${key}: ${value}`);}
-*/
-
-
-
-/*
-var d = new Date();
-d.setDate(d.getDate() - 12);
-console.log(d.toString());
-const jsonDate = d.toJSON();
-console.log(jsonDate);
-console.log(jsonDate.slice(0,10))
-let hola = jsonDate.slice(0,10)
-console.log(hola)
-*/
-
-
-/*
-let objeto;
-
-fetch("https://api.exchangerate.host/convert?from=USD&to=EUR")
-    .then(response => response.json())
-    .then(responseJSON => {
-        objeto = responseJSON;
-        console.log(responseJSON)})
-    .catch(error => console.error("error", error))
-
-
-console.log(objeto)
-
-*/
-
-
-/*let objeto;
-
-fetch("http://api.exchangeratesapi.io/v1/latest?access_key=2b9ffe353611a53c200df5759283cc85")
-    .then(response => response.json())
-    .then(responseJSON => {
-        objeto = responseJSON;
-        console.log(responseJSON)})
-    .catch(error => console.error("error", error))
-
-
-console.log(objeto)
-*/
-
-/*
-var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
-request.onload = function() {
-  var response = request.response;
-  console.log(response);
-}
-
-*/
