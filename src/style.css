@@ -102,3 +102,63 @@ h2{
     display: none;
     color: red;
 }
+
+#moneda-futuro{
+    width: 23%;
+}
+
+#moneda-base{
+    width: 23%;
+}
+
+.moneda-futuro{
+    background-image: url(img/ars.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-futuro-ars{
+    background-image: url(img/ars.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-futuro-usd{
+    background-image: url(img/usa.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-futuro-eur{
+    background-image: url(img/eur.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-base{
+    background-image: url(img/usa.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-base-ars{
+    background-image: url(img/ars.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-base-usd{
+    background-image: url(img/usa.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.moneda-base-eur{
+    background-image: url(img/eur.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.valor-opcion{
+    text-align: end;
+}
