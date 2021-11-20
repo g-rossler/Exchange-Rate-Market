@@ -1,5 +1,10 @@
 function grafico(arrayFechas, cotizacion, moneda){
-    
+    let currentChart = Chart.getChart("myChart"); 
+    if (currentChart != undefined) {
+        currentChart.destroy();
+    }
+
+
     let max = (Math.max(...cotizacion)) * 1.005
     let min = (Math.min(...cotizacion)) * 0.995
     let labelMoneda = `1 ${moneda}`
@@ -41,7 +46,7 @@ function grafico(arrayFechas, cotizacion, moneda){
         document.getElementById('myChart'),
         config
     )
-    
+   
 }
 
 
