@@ -105,10 +105,12 @@ h2{
 
 #moneda-futuro{
     width: 23%;
+    min-width: 90px;
 }
 
 #moneda-base{
     width: 23%;
+    min-width: 90px;
 }
 
 .moneda-futuro{
