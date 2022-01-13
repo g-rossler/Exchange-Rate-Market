@@ -164,3 +164,8 @@ h2{
 .valor-opcion{
     text-align: end;
 }
+
+#tabla-resultados{
+    display: none;
+    padding-bottom: 5vh;
+}

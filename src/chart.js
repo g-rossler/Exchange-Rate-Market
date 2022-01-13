@@ -53,7 +53,8 @@ function grafico(arrayFechas, cotizacion, moneda){
 function crearGrafico(monedaBase, monedaFuturo) {
     let fechaFinal = fechaHoy()
     let fechaInicio = fechaTreintaDias()
-    
+    document.querySelector("#tabla-resultados").style.display = "block"
+
     let paginaWeb = `https://api.exchangerate.host/timeseries?start_date=${fechaInicio}&end_date=${fechaFinal}&base=${monedaBase}&symbols=${monedaFuturo}`
 
     let arrayFechas
