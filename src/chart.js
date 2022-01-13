@@ -1,3 +1,18 @@
+function fechaTreintaDias(){
+    let fecha = new Date();
+    fecha.setDate(fecha.getDate() - 30);
+    const jsonDate = fecha.toJSON();
+    let fechaVieja = jsonDate.slice(0,10)
+    return fechaVieja
+}
+
+function fechaHoy(){
+    let fecha = new Date();
+    const jsonDate = fecha.toJSON();
+    let fechaHoy = jsonDate.slice(0,10)
+    return fechaHoy
+}
+
 function grafico(arrayFechas, cotizacion, moneda){
     let currentChart = Chart.getChart("myChart"); 
     if (currentChart != undefined) {
@@ -50,7 +65,7 @@ function grafico(arrayFechas, cotizacion, moneda){
 }
 
 
-function crearGrafico(monedaBase, monedaFuturo) {
+export default function crearGrafico(monedaBase, monedaFuturo) {
     let fechaFinal = fechaHoy()
     let fechaInicio = fechaTreintaDias()
     document.querySelector("#tabla-resultados").style.display = "block"

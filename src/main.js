@@ -1,4 +1,5 @@
 /// <reference types="jquery"/>
+import crearGrafico from "./chart.js"
 
 function borrarCantidades(){
     document.querySelector("#importe").value = ""
@@ -7,32 +8,15 @@ function borrarCantidades(){
 
 function mostrarResultados(){
     document.querySelector("#cuadro-resultado").style.display = "flex"
-
     crearElementoResultado()
 }
 
 function borrarResultado() {
-    
     if(document.querySelector("#cuadro-resultado-titulo")) {
         document.querySelector("#cuadro-resultado-titulo").remove()
         document.querySelector("#cuadro-resultado-cotizacion").remove()
     }
 
-}
-
-function fechaTreintaDias(){
-    let fecha = new Date();
-    fecha.setDate(fecha.getDate() - 30);
-    const jsonDate = fecha.toJSON();
-    let fechaVieja = jsonDate.slice(0,10)
-    return fechaVieja
-}
-
-function fechaHoy(){
-    let fecha = new Date();
-    const jsonDate = fecha.toJSON();
-    let fechaHoy = jsonDate.slice(0,10)
-    return fechaHoy
 }
 
 function crearElementoResultado(){
@@ -78,7 +62,7 @@ function limpiarPagina() {
 
 
 function cotizar() {
-    let objeto;
+    let objeto
     let resultado;
     limpiarPagina()
 
@@ -97,7 +81,6 @@ function cotizar() {
     .then(responseJSON => {
         resultado = responseJSON.rates[monedaFuturo].toFixed(2)
         objeto = responseJSON
-
         textoResultado.innerText = `${cantidadACotizar} ${monedaBase} son ${resultado} ${monedaFuturo}`
 
 })
