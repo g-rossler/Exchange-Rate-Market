@@ -4,11 +4,16 @@
 }
 
 body{
-    background: rgba(150, 200, 5,0.3);
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
 footer{
     margin: 1.5rem;
+}
+
+a{
+    color: white;
 }
 
 #cuadro-principal{
@@ -19,8 +24,13 @@ footer{
     -moz-box-shadow: 10px 14px 21px -3px rgba(0,0,0,0.79);
 }
 
+h1{
+    color: white;
+}
+
 h2{
     font-size: 1.2rem;
+    color: white;
 }
 
 .filas{
@@ -44,6 +54,7 @@ h2{
 
 #cuadro-creditos{
     padding: 1rem 0;
+    color: white;
 }
 
 #cuadro-calculadora-boton-cotizar{
@@ -109,6 +120,7 @@ h2{
 #moneda-base{
     width: 23%;
     min-width: 90px;
+    text-align-last: end;
 }
 
 .moneda-futuro{
