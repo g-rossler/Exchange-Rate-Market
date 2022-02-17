@@ -45,7 +45,7 @@ http-server
 
 El Exchange Rate Market es simple de usar. Una vez que cargo completamente la página principal, el usuario podra ver 4 cuadros. 
  
-<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/Readme/src/img/README/Pagina-Principal.png" align="center" alt="Pagina principal del Echange Rate Market">
+<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/main/src/img/README/Pagina-Principal.png" align="center" alt="Pagina principal del Echange Rate Market">
 <sup>Pagina principal del Echange Rate Market</sup>
 <br/><br/>
 
@@ -53,16 +53,16 @@ El primer cuadro es para elegir la divisa que se quiere convertir, la segunda es
 el tercer cuadro le permite ingresar la cantidad que se quiere convertir.
 Tambien se encuentra al final un boton con la leyenda "Cotizar" que al hacer click, tomara la informacion ingresada y devolvera los resultados.
 
-<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/Readme/src/img/README/Resultado.png" align="center" alt="Resultado">
+<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/main/src/img/README/Resultado.png" align="center" alt="Resultado">
 <br/><br/>
 
-<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/Readme/src/img/README/Resultado-Grafico.png" align="center" alt="Resultado con Grafico">
+<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/main/src/img/README/Resultado-Grafico.png" align="center" alt="Resultado con Grafico">
 <sup>Resultado con Grafico</sup>
 <br/><br/>
 
 Si el usuario ingresa un numero negativo, el sistema lo reconoce y muestra un aviso de error.
 
-<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/Readme/src/img/README/Error.png" align="center" alt="Error">
+<img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/main/src/img/README/Error.png" align="center" alt="Error">
 <br/><br/>
 
 #
