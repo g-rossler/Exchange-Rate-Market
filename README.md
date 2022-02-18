@@ -63,7 +63,6 @@ Tambien se encuentra al final un boton con la leyenda "Cotizar" que al hacer cli
 Si el usuario ingresa un numero negativo, el sistema lo reconoce y muestra un aviso de error.
 
 <img  src="https://raw.githubusercontent.com/g-rossler/Exchange-Rate-Market/main/src/img/README/Error.png" align="center" alt="Error">
-<br/><br/>
 
 #
 
